@@ -15,7 +15,7 @@ d3.csv("311_boston_data.csv").then(function(data) {
     const width = svgWidth - margin.left - margin.right;
     const height = svgHeight - margin.top - margin.bottom;
 
-    const svg = d3.select("body").append("svg")
+    const svg1 = d3.select("#chart1").append("svg")
         .attr("width", svgWidth)
         .attr("height", svgHeight)
         .append("g")
@@ -30,7 +30,7 @@ d3.csv("311_boston_data.csv").then(function(data) {
     y.domain([0, d3.max(top10Data, d => +d.Count)]);
 
     // Create bars
-    svg.selectAll(".bar")
+    svg1.selectAll(".bar")
         .data(top10Data)
         .enter().append("rect")
         .attr("class", "bar")
@@ -40,7 +40,7 @@ d3.csv("311_boston_data.csv").then(function(data) {
         .attr("height", d => height - y(+d.Count));
 
     // Add x-axis with rotated labels
-    svg.append("g")
+    svg1.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x)
             .tickFormat((d, i) => {
@@ -55,11 +55,11 @@ d3.csv("311_boston_data.csv").then(function(data) {
         .attr("transform", "rotate(-45)");
 
     // Add y-axis
-    svg.append("g")
+    svg1.append("g")
         .call(d3.axisLeft(y));
 
     // Add title
-    svg.append("text")
+    svg1.append("text")
         .attr("x", width / 2)
         .attr("y", -margin.top / 2)
         .attr("text-anchor", "middle")
@@ -68,7 +68,7 @@ d3.csv("311_boston_data.csv").then(function(data) {
         .text("Boston 311 Call Summary by Category");
 
   // Add subtitle
-    svg.append("text")
+    svg1.append("text")
         .attr("x", width / 2)
         .attr("y", -margin.top + 45)
         .attr("text-anchor", "middle")
@@ -88,7 +88,7 @@ d3.csv("311_boston_data.csv").then(function(data) {
         .text("Source: City of Boston");
 
     // Add authorship credit
-    svg.append("text")
+    svg1.append("text")
         .attr("x", width)
         .attr("y", height + margin.bottom)
         .attr("text-anchor", "end")
